@@ -27,6 +27,8 @@
 <script setup>
 import axios from "axios";
 
+const props = defineProps(["coins"]);
+
 const config = useRuntimeConfig();
 const isOpen = ref(false);
 const search = ref("");
@@ -44,12 +46,13 @@ const API_KEY = config.public.apiKey;
 
 const getSearch = async (input) => {
   loading.value = true;
-  try {
-    const url = `https://api.coinranking.com/v2/coins?search=${input}`;
+  
+  const url = `https://api.coinranking.com/v2/coins?search=${input}`;
 
-    const options = {
-      headers: { "x-access-token": API_KEY },
-    };
+  const options = {
+    headers: { "x-access-token": API_KEY },
+  };
+  try {
     const { data } = await axios.get(url, options);
     info.value = data.data.coins[0];
   } catch (error) {
@@ -61,11 +64,18 @@ const getSearch = async (input) => {
 
 const handleSubmit = () => {
   if (!search.value.trim()) {
-    alert("Input can not be blank");
-    closeModal();
-  } else {
-    getSearch(search.value.trim());
-    openModal()
+    return alert("Input can not be blank");
   }
+
+  const coinExists = props.coins.some((coin) =>
+    coin.name.toLocaleLowerCase().includes(search.value.trim().toLocaleLowerCase())
+  );
+
+  if (!coinExists) {
+    return alert("There is no such crypto coin");
+  }
+
+  getSearch(search.value.trim());
+  openModal();
 };
 </script>

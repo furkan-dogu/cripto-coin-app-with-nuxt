@@ -36,7 +36,7 @@
                   ></div>
                 </div>
               </div>
-              <div v-else class="font-anta flex flex-col items-center gap-5 relative" :key="info.uuid">
+              <div v-else class="font-anta flex flex-col items-center gap-5 relative">
                 <button class="absolute -top-3 -right-3 text-red-600 text-xl" @click="closeModal">
                     <IconsClose />
                 </button>
@@ -45,7 +45,9 @@
                     <span class="font-medium text-xs text-white px-2 py-[2px] rounded-full bg-orange-500">{{ info.symbol }}</span>
                 </div>
                 <p class="font-bold sm:text-2xl text-xl text-gray-800">$ {{ Number(info.price).toFixed(2) }}</p>
-                <img :src="info.iconUrl" :alt="info.name" class="w-24 h-24">
+                <a :href="info.coinrankingUrl" target="_blank">
+                    <img :src="info.iconUrl" :alt="info.name" class="w-24 h-24">
+                </a>
                 <div :class="['flex justify-center items-center gap-1', info.change < 0 ? 'text-red-500' : 'text-green-500']">
                     <span><IconsChart /></span>
                     <p>{{ info.change }}%</p>
