@@ -1,5 +1,5 @@
 <template>
-    <div class="w-full">
+    <div class="w-full p-2">
         <table class="w-full text-[9px] sm:text-base">
             <thead>
                 <tr class="text-left border-b">

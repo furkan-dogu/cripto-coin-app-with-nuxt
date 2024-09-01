@@ -1,6 +1,6 @@
 <template>
     <div class="container mx-auto flex flex-col items-center">
-        <h1 class="text-center text-4xl font-bold my-1">Cripto Coin App</h1>
+        <h1 class="text-center text-4xl font-bold my-1 tracking-wide pt-5">Cyripto Coin App</h1>
         <Search />
         <Table :coins="coins" />
     </div>
